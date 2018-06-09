@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebGL hello world</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="glCanvas" width="640" height="480"></canvas>
+
+  <div id="ui">
+    <div class="ui-item">angle</div>
+    <input type="range" min="0" max="360" value="0" id="angle-slider" class="ui-item">
+    <div id="angle-value" class="ui-item">0</div>
+  </div>
+
+  <script src="lib/webgl-debug.js"></script>
+  <script src="shaders/2d-vertex-shader.glsl"></script>
+  <script src="shaders/2d-fragment-shader.glsl"></script>
+  <script src="util/webgl-utils.js"></script>
+  <script src="util/m3.js"></script>
+  <script src="ui.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

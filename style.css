@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  align-items: flex-start;
+  
+  font-family: arial;
+  /* font-size: 1em; */
+}
+
+#glCanvas {
+  /* width: 640px;
+  height: 480px; */
+  border: 1px solid black;
+  margin-right: 10px;
+  
+}
+
+#ui {
+  display: flex;
+  align-items: center;
+}
+
+.ui-item + .ui-item {
+  margin-left: 10px;
+}
+
+#angle-slider {
+  /* align-self: baseline; */
+}
