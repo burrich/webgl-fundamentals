@@ -1,10 +1,6 @@
 /**
  * WebGL utils.
- * TODO: replace console.error by throw ?
- * TODO: rename to webgl-utils ?
  */
-
-'use strict';
 
 /**
  * Create a shader, upload the source and compile.
@@ -52,3 +48,5 @@ function initProgram(gl, vertexShaderSrc, fragmentShaderSrc) {
 
   return program;
 }
+
+export default initProgram;

@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  * Transformation Matrices.
  * 
@@ -10,8 +8,6 @@
  * - scale y to -1 (for a bottom to a top y axis origin)
  * 
  * rotation : clockwise formula
- * 
- * TODO: replace by a third party lib ?
  */
 const m3 = {
   projection: function(width, height) {
@@ -94,3 +90,5 @@ const m3 = {
     return m3.multiply(m, m3.scaling(sx, sy));
   }
 };
+
+export default m3;

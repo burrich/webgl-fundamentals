@@ -2,8 +2,6 @@
  * UI events.
  */
 
-'use strict';
-
 function setAngleSlider(cb) {
   const slider = document.getElementById('angle-slider');
   const textValue = document.getElementById('angle-value');
@@ -14,3 +12,5 @@ function setAngleSlider(cb) {
     cb(e.target.value);
   };
 }
+
+export default setAngleSlider;

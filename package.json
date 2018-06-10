@@ -1,0 +1,26 @@
+{
+  "name": "webgl-fundamentals",
+  "version": "0.0.0",
+  "description": "WebGL basic stuff based on webglfundamentals.org",
+  "private": true,
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "burrich",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.21.0",
+    "webgl-debug": "^2.0.1",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.3"
+  }
+}

@@ -2,7 +2,13 @@
  * WebGL hello world.
  */
 
-'use strict';
+import WebGLDebugUtils from 'webgl-debug';
+
+import initProgram from './util/webgl-utils.js';
+import m3 from './util/m3.js';
+import setAngleSlider from './ui.js';
+
+import './style.css';
 
 main(); // TODO: replace by an anonymous function ?
 
