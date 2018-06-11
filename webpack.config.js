@@ -1,9 +1,13 @@
-const path = require('path');
+const path              = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-// chunkPath: resolve("/glsl/chunks")
 
 module.exports = {
   mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist'
+  },
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
@@ -21,5 +25,8 @@ module.exports = {
         use: ['style-loader', 'css-loader'] 
       }
     ]
-  }
+  },
+  plugins: [
+    new CopyWebpackPlugin([{ from: './src/shaders', to: './'}])
+  ]
 };
