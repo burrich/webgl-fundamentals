@@ -4,9 +4,9 @@
 
 import WebGLDebugUtils from 'webgl-debug';
 
-import initProgram from './util/webgl-utils.js';
+import webglUtils from './util/webgl-utils.js';
 import m3 from './util/m3.js';
-import setAngleSlider from './ui.js';
+import ui from './ui.js';
 
 import './style.css';
 
@@ -28,7 +28,7 @@ function main() {
   }
 
   // Init Shader program
-  const shaderProgram = initProgram(gl, vertexShaderSrc, fragmentShaderSrc);
+  const shaderProgram = webglUtils.initProgram(gl, vertexShaderSrc, fragmentShaderSrc);
 
   // Look up input locations
   const positionAttributeLocation = gl.getAttribLocation(shaderProgram, 'a_position');
@@ -73,8 +73,7 @@ function main() {
   const color = [Math.random(), Math.random(), Math.random(), 1];
 
   drawScene();
-  setAngleSlider(updateAngle);
-
+  ui.setAngleSlider(updateAngle);
 
   // Update rectangle position at 60fps
   // const intervalId = setInterval(() => {
