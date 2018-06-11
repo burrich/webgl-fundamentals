@@ -1,5 +1,5 @@
-const vertexShaderSrc = `
-  attribute vec2 a_position;
+const vertexShaderSrc = `#version 300 es
+  in vec2 a_position;
 
   uniform mat3 u_matrix;
 

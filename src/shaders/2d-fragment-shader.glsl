@@ -1,10 +1,12 @@
-const fragmentShaderSrc = `
-  precision mediump float; // mandatory ?
+const fragmentShaderSrc = `#version 300 es
+  // Default precision (mandatory ?)
+  precision mediump float;
 
   uniform vec4 u_color;
 
+  out vec4 outColor;
+
   void main() {
-    // gl_FragColor = vec4(0.75, 0, 0, 1);
-    gl_FragColor = u_color;
+    outColor = u_color;
   }
 `;

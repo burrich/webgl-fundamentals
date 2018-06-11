@@ -14,12 +14,13 @@ main(); // TODO: replace by an anonymous function ?
 
 /**
  * Init the GL context and draw the letter F from pixel coordinates.
+ * 
+ * TODO: unbind vao with gl.bindVertexArray(null)
  */
 function main() {
   const canvas = document.getElementById('glCanvas');
 
-  // const gl = canvas.getContext('webgl');
-  const gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl"));
+  const gl = WebGLDebugUtils.makeDebugContext(canvas.getContext("webgl2"));
 
   if (!gl) {
     console.error('Unable to initialize WebGL, your browser or machine may not support it.');
@@ -38,8 +39,22 @@ function main() {
   const positionBuffer = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
 
+  // Init vertex array object
+  const vao = gl.createVertexArray();
+  gl.bindVertexArray(vao);
+
   // Fill buffer with letter F values
   setGeometry(gl);
+
+  gl.enableVertexAttribArray(positionAttributeLocation);
+
+  // Define how to pull out data from buffer to attribute
+  const size = 2; // components count by iteration (2 for x and y)
+  const type = gl.FLOAT;
+  const normalize = false; // ?
+  const stride = 0; // step of (size * sizeof(type)) bytes by iteration
+  const offset = 0;
+  gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
 
   // const letterWidth = 100;
   // const letterHeight = 150;
@@ -88,16 +103,8 @@ function main() {
 
     gl.useProgram(shaderProgram);
 
-    gl.enableVertexAttribArray(positionAttributeLocation);
-    // gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+    // gl.bindVertexArray(vao);
 
-    const size = 2; // components count by iteration (x, y)
-    const type = gl.FLOAT;
-    const normalize = false; // ?
-    const stride = 0; // step of (size * sizeof(type)) bytes by iteration
-    const offset = 0;
-    gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset);
-    
     // Compute the matrices
     let matrix = m3.projection(gl.canvas.clientWidth, gl.canvas.clientHeight);
     matrix = m3.translate(matrix, translation[0], translation[1]);
