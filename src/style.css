@@ -14,15 +14,12 @@ body {
   
 }
 
-#ui {
+.rotation-slider-group {
   display: flex;
   align-items: center;
 }
 
-.ui-item + .ui-item {
+.rotation-slider,
+.rotation-value {
   margin-left: 10px;
-}
-
-#angle-slider {
-  /* align-self: baseline; */
 }

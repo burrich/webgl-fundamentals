@@ -9,9 +9,23 @@
   <canvas id="glCanvas" width="640" height="480"></canvas>
 
   <div id="ui">
-    <div class="ui-item">angle</div>
-    <input type="range" min="0" max="360" value="0" id="angle-slider" class="ui-item">
-    <div id="angle-value" class="ui-item">0</div>
+    <div class="rotation-slider-group">
+      <div class="rotation-label">angle x</div>
+      <input class="rotation-slider" id="rotation-slider-x" type="range" min="0" max="360" value="0">
+      <div class="rotation-value" id="rotation-value-x">0</div>
+    </div>
+
+    <div class="rotation-slider-group">
+      <div class="rotation-label">angle y</div>
+      <input class="rotation-slider" id="rotation-slider-y" type="range" min="0" max="360" value="0">
+      <div class="rotation-value" id="rotation-value-y">0</div>
+    </div>
+
+    <div class="rotation-slider-group">
+      <div class="rotation-label">angle z</div>
+      <input class="rotation-slider" id="rotation-slider-z" type="range" min="0" max="360" value="0">
+      <div class="rotation-value" id="rotation-value-z">0</div>
+    </div>
   </div>
 
   <!-- TODO: webpack 4.0 compatible loader for glsl files -->
