@@ -8,10 +8,9 @@ const vertexShaderSrc = `#version 300 es
   out vec4 v_color;
 
   /**
-   * Set gl_Position by multiply the transformation matrix by the current a_position value (x,y)
+   * Set gl_Position and pass color to fragment shader.
    */
   void main() {
-    // last arg : clipping of the vertex position in the 3D space clipping (default 1.0)
     gl_Position = u_matrix * a_position;
 
     v_color = a_color;

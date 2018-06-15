@@ -6,6 +6,7 @@
  * - scale to [0;2] => *2
  * - translate to [-1;1] => -1, -1
  * - scale y to -1 (for a bottom to a top y axis origin)
+ * !!! => use orthographic matrix function for more flexibility
  * 
  * rotation : clockwise formula
  */
@@ -16,6 +17,19 @@ const m4 = {
       0, -2 / height, 0, 0,
       0, 0, 2 / depth, 0,
       -1, 1, 0, 1
+    ];
+  },
+
+  orthographic: function(left, right, bottom, top, near, far) {
+    return [
+      2 / (right - left), 0, 0, 0,
+      0, 2 / (top - bottom), 0, 0,
+      0, 0, 2 / (near - far), 0,
+ 
+      (left + right) / (left - right),
+      (bottom + top) / (bottom - top),
+      (near + far) / (near - far),
+      1,
     ];
   },
 

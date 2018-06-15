@@ -106,12 +106,14 @@ function main() {
   function drawScene() {
     // gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 
+    // Clear color and depth buffers (for depth testing)
     gl.clearColor(0.0, 0.0, 0.0, 0.0); // Optionnal (default value)
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
+    // Don't draw pixels which are behind other pixels
     gl.enable(gl.DEPTH_TEST);
 
-    // Don't draw triangles back faces
+    // Don't draw triangles back faces (determined by vertices order)
     gl.enable(gl.CULL_FACE);
 
     gl.useProgram(shaderProgram);
@@ -119,7 +121,15 @@ function main() {
     // gl.bindVertexArray(vao);
 
     // Compute the matrices
-    let matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400);
+    const left = 0;
+    const right = gl.canvas.clientWidth;
+    const bottom = gl.canvas.clientHeight;
+    const top = 0;
+    const near = 400;
+    const far = -400;
+    // let matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400);
+    let matrix = m4.orthographic(left, right, bottom, top, near, far);
+
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
     matrix = m4.xRotate(matrix, rotation[0]);
     matrix = m4.yRotate(matrix, rotation[1]);
