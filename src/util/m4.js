@@ -42,18 +42,7 @@ const m4 = {
     ];
   },
 
-  // rotation: function(angleInRadians) {
-  //   const c = Math.cos(angleInRadians);
-  //   const s = Math.sin(angleInRadians);
-
-  //   return [
-  //     c,-s, 0,
-  //     s, c, 0,
-  //     0, 0, 1
-  //   ];
-  // },
-
-  xRotation: function(angleInRadians) { // counter-clockwise
+  xRotation: function(angleInRadians) {
     const c = Math.cos(angleInRadians);
     const s = Math.sin(angleInRadians);
 
@@ -65,7 +54,7 @@ const m4 = {
     ];
   },
 
-  yRotation: function(angleInRadians) { // clockwise
+  yRotation: function(angleInRadians) {
     const c = Math.cos(angleInRadians);
     const s = Math.sin(angleInRadians);
 
@@ -77,7 +66,7 @@ const m4 = {
     ];
   },
 
-  zRotation: function(angleInRadians) { // counter-clockwise
+  zRotation: function(angleInRadians) {
     const c = Math.cos(angleInRadians);
     const s = Math.sin(angleInRadians);
 
