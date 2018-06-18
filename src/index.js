@@ -10,6 +10,11 @@ import ui from './ui.js';
 
 import './style.css';
 
+// Trifoce base values (equilateral triangle)
+const triangleLength = 150;
+const triangleHeight = triangleLength * Math.sqrt(3) / 2;
+const triangleDepth = 35;
+
 main(); // TODO: replace by an anonymous function ?
 
 /**
@@ -72,23 +77,46 @@ function main() {
   offset = 0;
   gl.vertexAttribPointer(colorAttributeLocation, size, type, normalize, stride, offset);
 
-  // Translation
-  let translation = [gl.canvas.width / 2, gl.canvas.height / 2, 0];
+  // Transformations
+  
+  const translation = [
+    gl.canvas.width / 2 ,
+    gl.canvas.height / 2 - triangleHeight / 2,
+    0
+  ];
+  
+  const xDegreesRotation = 340;
+  const yDegreesRotation = 30;
+  const zDegreesRotation = 60;
 
-  let rotation = [0, 0, 0];
-  rotation[2] = 60 * Math.PI / 180;
+  const rotation = [
+    degreesToRadians(xDegreesRotation),
+    degreesToRadians(yDegreesRotation),
+    degreesToRadians(zDegreesRotation)
+  ];
 
   const scale = [1, 1, 1];
-
+  
   drawScene();
+
+  // Init ui sliders
+  // TODO: async
   ui.setupRotationSliders(updateRotation);
+  ui.update(xDegreesRotation, yDegreesRotation, zDegreesRotation, true);
 
   /**
    * Set a new angle in radians and update the scene. 
    */
   function updateRotation(axis, angleInDegrees) {
-    rotation[axis] = angleInDegrees * Math.PI / 180;
+    rotation[axis] = degreesToRadians(angleInDegrees);
     drawScene();
+  } 
+
+  /**
+   * Convert an angle from degrees to radians.
+   */
+  function degreesToRadians(angleInDegrees) {
+    return angleInDegrees * Math.PI / 180;
   }
 
   /**
@@ -147,11 +175,6 @@ function main() {
  * See https://www.khronos.org/opengl/wiki/Face_Culling.
  */
 function setTriforceCoordinates(gl) {
-  // Equilateral triangle var
-  const triangleLength = 150;
-  const triangleHeight = triangleLength * Math.sqrt(3) / 2;
-  const triangleDepth = 35;
-
   const coordinates = new Float32Array([
     // Front
     0, 0, 0,
