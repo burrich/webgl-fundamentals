@@ -33,6 +33,18 @@ const m4 = {
     ];
   },
 
+  perspective: function(fieldOfViewInRadians, aspect, near, far) {
+    const f = Math.tan(Math.PI * 0.5 - 0.5 * fieldOfViewInRadians);
+    const rangeInv = 1.0 / (near - far);
+ 
+    return [
+      f / aspect, 0, 0, 0,
+      0, f, 0, 0,
+      0, 0, (near + far) * rangeInv, -1,
+      0, 0, near * far * rangeInv * 2, 0
+    ];
+  },
+
   translation: function(tx, ty, tz) {
     return [
       1, 0, 0, 0,

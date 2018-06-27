@@ -82,7 +82,7 @@ function main() {
   const translation = [
     gl.canvas.width / 2 ,
     gl.canvas.height / 2 - triangleHeight / 2,
-    0
+    50
   ];
   
   const xDegreesRotation = 340;
@@ -140,15 +140,14 @@ function main() {
     gl.bindVertexArray(vao);
 
     // Compute the matrices
-    const left = 0;
-    const right = gl.canvas.clientWidth;
-    const bottom = gl.canvas.clientHeight;
-    const top = 0;
-    const near = 400;
-    const far = -400;
-    let matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400);
-    // let matrix = m4.orthographic(left, right, bottom, top, near, far);
+    const fov = degreesToRadians(60);
+    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
+    const zNear = 1;
+    const zFar = 2000;
+    // let matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400);
+    let matrix = m4.perspective(fov, aspect, zNear, zFar);
 
+    // matrix = m4.multiply(matrix, m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400));
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
     matrix = m4.xRotate(matrix, rotation[0]);
     matrix = m4.yRotate(matrix, rotation[1]);
