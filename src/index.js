@@ -14,6 +14,7 @@ import './style.css';
 const triangleLength = 150;
 const triangleHeight = triangleLength * Math.sqrt(3) / 2;
 const triangleDepth = 35;
+const triangleApothem = triangleHeight / 3; // height of the center from each vertex
 
 main(); // TODO: replace by an anonymous function ?
 
@@ -80,14 +81,14 @@ function main() {
   // Transformations
   
   const translation = [
-    gl.canvas.width / 2 ,
-    gl.canvas.height / 2 - triangleHeight / 2,
-    50
+    0,
+    0,
+    -360
   ];
   
-  const xDegreesRotation = 340;
-  const yDegreesRotation = 30;
-  const zDegreesRotation = 60;
+  const xDegreesRotation = 0;
+  const yDegreesRotation = 180;
+  const zDegreesRotation = 0;
 
   const rotation = [
     degreesToRadians(xDegreesRotation),
@@ -140,6 +141,10 @@ function main() {
     gl.bindVertexArray(vao);
 
     // Compute the matrices
+
+    // Apply perspective 
+    // nb : with perspective matrix, 
+    // the figure is rendered with a y rotation of 180 deg (y axis is up)
     const fov = degreesToRadians(60);
     const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
     const zNear = 1;
@@ -153,7 +158,13 @@ function main() {
     matrix = m4.yRotate(matrix, rotation[1]);
     matrix = m4.zRotate(matrix, rotation[2]);
     matrix = m4.scale(matrix, scale[0], scale[1], scale[2]);
-    // matrix = m4.translate(matrix, -50, -75, 0); // To simulate the rotation from the center
+
+    // Simulate the rotation from the center
+    matrix = m4.translate(matrix, 
+      - triangleLength / 2, 
+      Math.sin(30) * triangleApothem, 
+      triangleDepth / 2
+    );
 
     // Set uniforms for shaders
     // TODO: 2f, 2fv, false... meaning ?
@@ -254,12 +265,12 @@ function setColors(gl) {
     0,   0,   0,
     0,   0,   0,
 
-    // right side top
+    // Right side top
     218, 165,  32,
     218, 165,  32,
     0,   0,   0,
 
-    // right side bottom
+    // Right side bottom
     0,   0,   0,
     218, 165,  32,
     0,   0,   0,
