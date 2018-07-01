@@ -80,15 +80,21 @@ function main() {
 
   // Transformations
   
+  // const translation = [
+  //   gl.canvas.clientWidth / 2 - triangleLength / 2,
+  //   gl.canvas.clientHeight / 2 - triangleApothem,
+  //   0
+  // ]; // Canvas center when the modele origin in not it center
+
   const translation = [
-    0,
-    0,
-    -360
-  ];
+    gl.canvas.clientWidth / 2,
+    gl.canvas.clientHeight / 2,
+    0
+  ]; 
   
   const xDegreesRotation = 0;
-  const yDegreesRotation = 180;
-  const zDegreesRotation = 0;
+  const yDegreesRotation = 0;
+  const zDegreesRotation = 60;
 
   const rotation = [
     degreesToRadians(xDegreesRotation),
@@ -142,17 +148,15 @@ function main() {
 
     // Compute the matrices
 
-    // Apply perspective 
-    // nb : with perspective matrix, 
-    // the figure is rendered with a y rotation of 180 deg (y axis is up)
-    const fov = degreesToRadians(60);
-    const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
-    const zNear = 1;
-    const zFar = 2000;
-    // let matrix = m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400);
-    let matrix = m4.perspective(fov, aspect, zNear, zFar);
+    // Orthographic projection values
+    const left = 0;
+    const right = gl.canvas.clientWidth;
+    const bottom = gl.canvas.clientHeight;
+    const top = 0;
+    const near = 400;
+    const far = -400;
 
-    // matrix = m4.multiply(matrix, m4.projection(gl.canvas.clientWidth, gl.canvas.clientHeight, 400));
+    let matrix = m4.orthographic(left, right, bottom, top, near, far);
     matrix = m4.translate(matrix, translation[0], translation[1], translation[2]);
     matrix = m4.xRotate(matrix, rotation[0]);
     matrix = m4.yRotate(matrix, rotation[1]);
@@ -160,11 +164,7 @@ function main() {
     matrix = m4.scale(matrix, scale[0], scale[1], scale[2]);
 
     // Simulate the rotation from the center
-    matrix = m4.translate(matrix, 
-      - triangleLength / 2, 
-      Math.sin(30) * triangleApothem, 
-      triangleDepth / 2
-    );
+    matrix = m4.translate(matrix, - triangleLength / 2,  - triangleApothem, 0);
 
     // Set uniforms for shaders
     // TODO: 2f, 2fv, false... meaning ?
